@@ -51,11 +51,11 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
                     }
                 }).then((responses) => {
                     let message_text
-                    if (responses[0].queryResult.parameters.fields.gyagu.stringValue) {
-                        message_text = `${responses[0].queryResult.parameters.fields.gyagu.stringValue}`;
-                    } else {
+                    // if (responses[0].queryResult.parameters.fields.gyagu.stringValue) {
+                    //     message_text = `${responses[0].queryResult.parameters.fields.gyagu.stringValue}`;
+                    // } else {
                         message_text = `aaa`;
-                    }
+                    // }
                     return bot.replyMessage(event.replyToken, {
                         type: "text",
                         text: message_text
