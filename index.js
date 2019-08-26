@@ -50,18 +50,18 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
                         }
                     }
                 }).then((responses) => {
-                    // if (responses[0].queryResult && responses[0].queryResult.action == "handle-delivery-order"){
+                    if (responses[0].queryResult && responses[0].queryResult.action == "greeting"){
                         let message_text
                         // if (responses[0].queryResult.parameters.fields.menu.stringValue){
                         //     message_text = `毎度！${responses[0].queryResult.parameters.fields.menu.stringValue}ね。どちらにお届けしましょ？`;
                         // } else {
-                            message_text = `毎度！ご注文は？`;
+                            message_text = `トゥース！`;
                         // }
                         return bot.replyMessage(event.replyToken, {
                             type: "text",
                             text: message_text
                         });
-                    // }
+                    }
                 })
             );
         }
