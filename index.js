@@ -15,12 +15,11 @@ const line_config = {
 // Webサーバー設定
 server.listen(process.env.PORT || 3000);
 
-
 // APIコールのためのクライアントインスタンスを作成
 const bot = new line.Client(line_config);
 
 // Dialogflowのクライアントインスタンスを作成
-const session_cliant = new dialogflow.SessionsClient({
+const session_client = new dialogflow.SessionsClient({
     project_id: process.env.GOOGLE_PROJECT_ID,
     credentials: {
         client_email: process.env.GOOGLE_CLIENT_EMAIL,
@@ -51,25 +50,20 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
                         }
                     }
                 }).then((responses) => {
-                    // if (responses[0].queryResult &&  responses[0].queryResult.action == "greeting"){
+                    // if (responses[0].queryResult && responses[0].queryResult.action == "handle-delivery-order"){
                         let message_text
-                        message_text = `トゥース！`
+                        // if (responses[0].queryResult.parameters.fields.menu.stringValue){
+                        //     message_text = `毎度！${responses[0].queryResult.parameters.fields.menu.stringValue}ね。どちらにお届けしましょ？`;
+                        // } else {
+                            message_text = `毎度！ご注文は？`;
+                        // }
+                        return bot.replyMessage(event.replyToken, {
+                            type: "text",
+                            text: message_text
+                        });
                     // }
-                    return bot.replyMessage(event.replyToken, {
-                        type: "text",
-                        text: message_text
-                    });
                 })
             );
-            
-            // // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
-            // if (event.message.text == "こんにちは"){
-            //     // replyMessage()で返信し、そのプロミスをevents_processedに追加。
-            //     events_processed.push(bot.replyMessage(event.replyToken, {
-            //         type: "text",
-            //         text: "これはこれは"
-            //     }));
-            // }
         }
     });
 
