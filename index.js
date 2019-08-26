@@ -50,18 +50,20 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
                         }
                     }
                 }).then((responses) => {
-                    if (responses[0].queryResult && responses[0].queryResult.action == "greeting"){
-                        let message_text
-                        // if (responses[0].queryResult.parameters.fields.menu.stringValue){
-                        //     message_text = `毎度！${responses[0].queryResult.parameters.fields.menu.stringValue}ね。どちらにお届けしましょ？`;
-                        // } else {
-                            message_text = `トゥース！`;
-                        // }
-                        return bot.replyMessage(event.replyToken, {
-                            type: "text",
-                            text: message_text
-                        });
+                    let message_text
+                    if (responses[0].queryResult.parameters.fields.gyagu.stringValue) {
+                        message_text = `${responses[0].queryResult.parameters.fields.gyagu.stringValue}`;
+                    } else if (responses[0].queryResult && responses[0].queryResult.action == "greeting"){ 
+                        message_text = `よろしく`;
+                    } else if (responses[0].queryResult && responses[0].queryResult.action == "question") {
+                        message_text = `それには答えられないな。何かやって欲しいギャグはあるかね？`
+                    } else {
+                        message_text = `でへへへへへ`
                     }
+                    return bot.replyMessage(event.replyToken, {
+                      type: "text",
+                      text: message_text
+                    });
                 })
             );
         }
