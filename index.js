@@ -53,12 +53,12 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
                     let message_text
                     if (responses[0].queryResult.parameters.fields.gyagu.stringValue) {
                         message_text = `${responses[0].queryResult.parameters.fields.gyagu.stringValue}`;
-                    } else if (responses[0].queryResult && responses[0].queryResult.action == "greeting"){ 
+                    } else if (responses[0].queryResult.parameters.fields.greeting.stringValue) { 
                         message_text = `よろしく`;
-                    } else if (responses[0].queryResult && responses[0].queryResult.action == "question") {
-                        message_text = `それには答えられないな。何かやって欲しいギャグはあるかね？`
+                    } else if (responses[0].queryResult.parameters.fields.question.stringValue) {
+                        message_text = `それには答えられないな。何かやって欲しいギャグはあるかね？`;
                     } else {
-                        message_text = `でへへへへへ`
+                        message_text = `でへへへへへ`;
                     }
                     return bot.replyMessage(event.replyToken, {
                       type: "text",
