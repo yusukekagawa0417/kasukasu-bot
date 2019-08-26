@@ -47,7 +47,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
                     queryInput: {
                         text: {
                             text: event.message.text,
-                            languageCode: "ja"
+                            languageCode: "ja",
                         }
                     }
                 }).then((responses) => {
@@ -60,7 +60,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
                         text: message_text
                     });
                 })
-            )
+            );
             
             // // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             // if (event.message.text == "こんにちは"){
