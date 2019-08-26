@@ -51,10 +51,10 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
                         }
                     }
                 }).then((responses) => {
-                    if (responses[0].queryResult &&  responses[0].queryResult.action == "greeting"){
+                    // if (responses[0].queryResult &&  responses[0].queryResult.action == "greeting"){
                         let message_text
                         message_text = `トゥース！`
-                    }
+                    // }
                     return bot.replyMessage(event.replyToken, {
                         type: "text",
                         text: message_text
