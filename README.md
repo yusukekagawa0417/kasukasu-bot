@@ -10,5 +10,3 @@
  Node.js ： Bot本体を開発  
  LINEのMessagingAPI ： メッセージのやりとりを実現  
  Dialogflow ： 自然言語処理  
-
- かすかすぼっと.jpeg   
